@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Opus</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="manifest" href="/manifest.json">
+
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+
+
+
+<link href="styles.d976f48b3441f8e1d4f5.bundle.css" rel="stylesheet"/></head>
+
+<body>
+  <app-root>Loading...</app-root>
+
+  <script>
+  if ('serviceWorker' in navigator && 'PushManager' in window) {
+  console.log('Service Worker and Push is supported');
+  navigator.serviceWorker.register('sw.js').then(function(swReg) {
+    console.log('Service Worker is registered', swReg);
+    subscribe(swReg);
+    swRegistration = swReg;
+  })
+  .catch(function(error) {
+    console.error('Service Worker Error', error);
+  });
+} else {
+  console.warn('Push messaging is not supported');
+  pushButton.textContent = 'Push Not Supported';
+}
+
+function subscribe(serviceWorkerReg) {  
+  var applicationServerPublicKey="BHhJqF2pkq43jt1Ute8TfXtBLmjvjTiCWRbYEBm91aBWZl1J7y8m6BNz0PCfvlnTJvtbbU4EyyFVSbtBCU52upE";
+  const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
+    serviceWorkerReg.pushManager.subscribe({userVisibleOnly: true,applicationServerKey:applicationServerKey})
+    .then((subscription) => addSubscriptionIDToDB(subscription))
+}
+function addSubscriptionIDToDB(subscriptionKey){
+console.log(JSON.stringify(subscriptionKey));
+}
+function urlB64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/\-/g, '+')
+    .replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
+</script>
+<script type="text/javascript" src="inline.234c190aa980beb1cf3c.bundle.js"></script><script type="text/javascript" src="polyfills.2805d2c7f2149663e694.bundle.js"></script><script type="text/javascript" src="scripts.1777a0cd0fe69dd6e4b8.bundle.js"></script><script type="text/javascript" src="vendor.958d08cff53526d67c7e.bundle.js"></script><script type="text/javascript" src="main.a6972e352f80588c7a23.bundle.js"></script></body>
+
+</html>
