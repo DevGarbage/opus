@@ -8,13 +8,59 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="manifest" href="/manifest.json">
 
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+
+
 
 </head>
 
 <body>
   <app-root>Loading...</app-root>
+
+  <script>
+  if ('serviceWorker' in navigator && 'PushManager' in window) {
+  console.log('Service Worker and Push is supported');
+  navigator.serviceWorker.register('sw.js').then(function(swReg) {
+    console.log('Service Worker is registered', swReg);
+    subscribe(swReg);
+    swRegistration = swReg;
+  })
+  .catch(function(error) {
+    console.error('Service Worker Error', error);
+  });
+} else {
+  console.warn('Push messaging is not supported');
+  pushButton.textContent = 'Push Not Supported';
+}
+
+function subscribe(serviceWorkerReg) {  
+  var applicationServerPublicKey="BHhJqF2pkq43jt1Ute8TfXtBLmjvjTiCWRbYEBm91aBWZl1J7y8m6BNz0PCfvlnTJvtbbU4EyyFVSbtBCU52upE";
+  const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
+    serviceWorkerReg.pushManager.subscribe({userVisibleOnly: true,applicationServerKey:applicationServerKey})
+    .then((subscription) => addSubscriptionIDToDB(subscription))
+}
+function addSubscriptionIDToDB(subscriptionKey){
+console.log(JSON.stringify(subscriptionKey));
+}
+function urlB64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/\-/g, '+')
+    .replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
+</script>
 </body>
 
 </html>
