@@ -1,0 +1,10 @@
+.add-new-item{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.task-wrapper{
+    max-height: 90%;
+    overflow: auto;
+}

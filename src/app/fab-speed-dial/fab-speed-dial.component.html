@@ -1,0 +1,13 @@
+<div class="speed-dial-wrap">
+    <div class="dial-item" [ngClass]="{close:!isDialItemOpen}">
+        <div class="btn-group-sm fab-btn-align">
+            <a href="javascript:void(0)" class="btn btn-default btn-group-sm btn-fab"><i class="material-icons">access_time</i></a>
+        </div>
+        <div class="btn-group-sm fab-btn-align">
+            <a href="javascript:void(0)" class="btn btn-default btn-group-sm btn-fab"><i class="material-icons">delete</i></a>
+        </div>
+    </div>
+    <div>
+        <a href="javascript:void(0)" (click)="openDialItem()" class="btn btn-primary btn-fab"><i class="material-icons">menu</i></a>
+    </div>
+</div>

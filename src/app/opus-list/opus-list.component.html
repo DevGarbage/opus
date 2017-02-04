@@ -1,0 +1,12 @@
+<app-header></app-header>
+
+<div class="task-wrapper">
+  <div class="col-xs-12 col-md-3" *ngFor="let task of taskList">
+    <div class="well well-lg">
+      {{task.details}}
+    </div>
+  </div>
+</div>
+
+<a href="javascript:void(0)" (click)="openNewItem()" class="add-new-item btn btn-primary btn-fab">
+  <i class="material-icons">add</i></a>

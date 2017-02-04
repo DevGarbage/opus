@@ -1,0 +1,11 @@
+<app-back-link-header (backClick)="onBackClick()"></app-back-link-header>
+<div class="col-xs-12 col-md-10 col-md-offset-1">
+    <div contenteditable="true" class="well well-lg">
+        <div class="form-group">
+            <textarea [(ngModel)]="newTask" class="form-control" rows="5" placeholder=""></textarea>
+        </div>
+    </div>
+</div>
+
+
+<app-fab-speed-dial></app-fab-speed-dial>

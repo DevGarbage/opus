@@ -1,0 +1,14 @@
+.speed-dial-wrap{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.fab-btn-align{
+    text-align: center;
+    margin-bottom: 3px;
+}
+
+.dial-item.close{
+    opacity: 0;
+}
